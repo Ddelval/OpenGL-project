@@ -169,7 +169,7 @@ void renderQuad();
 bool b = true;
 void draw() {
     cout << "draw frame" << endl;
-   // sb->setContent(0, DataDictionary::getCube("Grass"), 1);
+    sb->setContent(0, DataDictionary::getCube("Grass"), 1);
     glEnable(GL_FRAMEBUFFER_SRGB);
     s.tex = true;
     auto vp = player.getFront();
@@ -214,5 +214,5 @@ void draw() {
 
     if (isBreaking) breaking.draw(s);
     
-    //sb->draw();
+    sb->draw();
 }
