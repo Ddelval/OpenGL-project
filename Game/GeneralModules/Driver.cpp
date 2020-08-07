@@ -20,7 +20,7 @@ int main(){
     
     int wid = 800;
     int hei = 600;
-#ifndef _APPLE_
+#ifdef _APPLE_
     std::cout << "HI" << std::endl;
     wid *= 2;
     hei *= 2;
@@ -42,7 +42,8 @@ int main(){
 
 
     glfwGetFramebufferSize(window,&wid, &hei);
-    glViewport(0,0,wid,hei);
+    std::cout << wid << " " << hei << std::endl;
+    //glViewport(0,0,wid,hei);
     setup(); 
     glEnable(GL_DEPTH_TEST);
 

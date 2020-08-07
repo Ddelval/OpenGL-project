@@ -196,7 +196,12 @@ void Map::draw(Shader& s, Graphics::CameraData& c) {
     }
 
     s.use();
-    int wid = 800 * 2, hei = 600 * 2;
+    int wid = 800, hei = 600;
+#ifdef _APPLE_
+    wid *= 2;
+    hei *= 2;
+#endif
+
     glViewport(0, 0, wid, hei);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

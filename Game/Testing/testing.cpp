@@ -179,7 +179,7 @@ void draw() {
     cd.setAngles(glm::radians(45.0f), 800 / 600.0f);
     s.use();
 
-    int wid = 800, hei = 600;
+    int wid = 400, hei = 300;
 #ifdef _APPLE_
     wid *= 2;
     hei *= 2;
