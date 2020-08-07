@@ -1,0 +1,6 @@
+Grass grass_0 grass_2 grass_1 grass_1 grass_1 grass_1 grass_block 0
+Rock rock rock rock rock rock rock grass_block 0
+Snow snow rock snow_rock  snow_rock  snow_rock  snow_rock grass_block 0
+Sand sand  sand  sand  sand  sand  sand grass_block 0
+Wood wood_2 wood_2 wood_1 wood_1 wood_1 wood_1 grass_block 0
+Leaves leaves leaves leaves leaves leaves leaves grass_block 1
