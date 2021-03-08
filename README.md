@@ -7,6 +7,7 @@ So far I have included:
 - Basic collision detection system using cuboids as hitboxes and only comparing the vertices to detect intersections.
 - Simple ray casting to identify the closest filled block that the player is pointing at.
 - Inventory bar
+- Game engine handling collisons, entities and items
 
 ![Screenshot](screenshot.png)
 
