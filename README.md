@@ -8,6 +8,8 @@ So far I have included:
 - Simple ray casting to identify the closest filled block that the player is pointing at.
 - Inventory bar
 
+![Screenshot](screenshot.png)
+
 Feel free to use the code and resources in this repository as you want.
 
 Any comments on the approaches used to solve the problems tackled would be appreciated
