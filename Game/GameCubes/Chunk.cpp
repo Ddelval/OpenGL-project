@@ -121,13 +121,13 @@ void Chunk::setCube(int x, int y, int z, const Cube* cub) {
 void Chunk::updateCube(int x, int y, int z, const Cube* cub) {
     this->data[x][y][z] = cub;
     modified = true;
-    std::cout << "blah "<<x<<" "<<y<<" "<<z<<std::endl;
-    if (x == 0) adyacent[0][0]->modified = true;
-    if (x == ChunkWidth-1) adyacent[0][1]->modified = true;
-    if (y == 0) adyacent[1][0]->modified = true;
-    if (y == ChunkHeight-1) adyacent[1][1]->modified = true;
-    if (z == 0) adyacent[2][0]->modified = true;
-    if (z == ChunkLength-1) adyacent[2][1]->modified = true;
+    std::cout << "blah " << x << " " << y << " " << z << std::endl;
+    if (adyacent[0][0] && x == 0) adyacent[0][0]->modified = true;
+    if (adyacent[0][1] && x == ChunkWidth - 1) adyacent[0][1]->modified = true;
+    if (adyacent[1][0] && y == 0) adyacent[1][0]->modified = true;
+    if (adyacent[1][1] && y == ChunkHeight - 1) adyacent[1][1]->modified = true;
+    if (adyacent[2][0] && z == 0) adyacent[2][0]->modified = true;
+    if (adyacent[2][1] && z == ChunkLength - 1) adyacent[2][1]->modified = true;
 }
 
 void Chunk::setHeight(int x, int z, int h) {

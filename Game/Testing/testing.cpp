@@ -1,6 +1,5 @@
 #include <stdlib.h>
 
-#include "Graphics/UI/SelectionBar.hpp"
 #include <array>
 #include <cmath>
 #include <filesystem>
@@ -13,12 +12,12 @@
 #include "GameCubes/DataDictionary.hpp"
 #include "GameCubes/Map.hpp"
 #include "GeneralModules/Camera.hpp"
-#include "Graphics/Lighting/DirectionalShadowMap.hpp"
-#include "Graphics/MeshBuilder.hpp"
-
 #include "GeneralModules/Shader.hpp"
 #include "GeneralModules/Texture.hpp"
 #include "GeneralModules/inter.h"
+#include "Graphics/Lighting/DirectionalShadowMap.hpp"
+#include "Graphics/MeshBuilder.hpp"
+#include "Graphics/UI/SelectionBar.hpp"
 
 static Shader s2;
 
@@ -33,9 +32,9 @@ Entities::Player player(&map);
 Graphics::Mesh breaking;
 bool isBreaking = false;
 glm::vec3 prevBlock = {-1, -1, -1};
-int counterBlock = 60;
+int counterBlock = 30;
 
-bool cursorHid= true;
+bool cursorHid = true;
 bool pressed = false;
 void processInput(GLFWwindow* window) {
     deltaTime = glfwGetTime() - lastFrame;
@@ -61,22 +60,22 @@ void processInput(GLFWwindow* window) {
         player.jump();
         //cout << "hi";
     }
-       
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         if (!pressed) {
-            if(cursorHid)
+            if (cursorHid)
                 glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
-            else glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+            else
+                glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
             cursorHid = !cursorHid;
         }
         pressed = true;
-            }
-        else{
-            pressed = false;
-        }
-     isBreaking = false;
+    } else {
+        pressed = false;
+    }
+    isBreaking = false;
 
     if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_1) == GLFW_PRESS) {
         glm::vec3 v = map.getFirstBlock(player.getViewPosition(), player.getFront(), 100);
@@ -90,7 +89,7 @@ void processInput(GLFWwindow* window) {
                     map.updateBlock(v.x, v.y, v.z, nullptr);
                     counterBlock = 60;
                 }
-                
+
                 std::string nam = "break_" + to_string(6 - int(counterBlock / 8.6f));
 
                 const Texture* t = DataDictionary::getTexture(nam);
@@ -138,7 +137,7 @@ Graphics::UI::SelectionBar* sb;
 
 float ipos = 0;
 void processScroll(GLFWwindow* window, double xoffset, double yoffset) {
-   // std::cout << yoffset << endl;
+
     ipos += (-yoffset / 3);
     if (ipos < 0) ipos += 8;
     if (ipos >= 8) ipos -= 8;
@@ -148,7 +147,6 @@ void processScroll(GLFWwindow* window, double xoffset, double yoffset) {
 const uint shadowWid = 2 * 2048, shadowHei = 2048;
 
 uint depthMap;
-
 
 Shader s, sdebug;
 void setup() {
@@ -165,8 +163,11 @@ void setup() {
     sb = new Graphics::UI::SelectionBar;
 }
 
-void renderQuad();
 bool b = true;
+
+extern int viewPortWidth;
+extern int viewPortHeight;
+
 void draw() {
     cout << "draw frame" << endl;
     sb->setContent(0, DataDictionary::getCube("Grass"), 1);
@@ -179,13 +180,9 @@ void draw() {
     cd.setAngles(glm::radians(45.0f), 800 / 600.0f);
     s.use();
 
-    int wid = 400, hei = 300;
-#ifdef _APPLE_
-    wid *= 2;
-    hei *= 2;
-#endif
-    
-    glViewport(0, 0, wid, hei);
+
+
+    glViewport(0, 0, viewPortWidth, viewPortHeight);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glClearColor(0.0f, 0.3f, 0.7f, 1.0f);
@@ -206,13 +203,13 @@ void draw() {
     s.setvec3("dirLight.diffuse", glm::vec3(0.7f, 0.6f, 0.6f));
     s.setvec3("dirLight.specular", glm::vec3(0.0f, 0.0f, 0.0f));
     s.setvec3("viewPos", player.getViewPosition());
-    
+
     s.setmat3("normalMatrix", glm::mat3(glm::transpose(glm::inverse(model))));
 
     cd.drawingDistance = 175;
     map.draw(s, cd);
 
     if (isBreaking) breaking.draw(s);
-    
+
     sb->draw();
 }

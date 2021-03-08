@@ -168,6 +168,9 @@ std::vector<glm::vec3> Map::visibleChunksCoordinates(const Graphics::CameraData&
 }
 void renderQuad();
 
+extern int viewPortWidth;
+extern int viewPortHeight;
+
 void Map::draw(Shader& s, Graphics::CameraData& c) {
     std::vector<glm::vec3> seenChunks = visibleChunksCoordinates(c);
     for (auto a : seenChunks) {
@@ -196,13 +199,8 @@ void Map::draw(Shader& s, Graphics::CameraData& c) {
     }
 
     s.use();
-    int wid = 800, hei = 600;
-#ifdef _APPLE_
-    wid *= 2;
-    hei *= 2;
-#endif
 
-    glViewport(0, 0, wid, hei);
+    glViewport(0, 0, viewPortWidth, viewPortHeight);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glClearColor(0.0f, 0.3f, 0.7f, 1.0f);
