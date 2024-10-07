@@ -1,6 +1,10 @@
 # OpenGL-project
-Just a simple Minecraft-like game built using OpenGL 3.3, glad, glfw3 and glm.
+> [!WARNING]
+> This project has not been updated in over four years, and its build system is extremely basic.
+> The chances of it building successfully on a modern system are slim.
+> However, as of October 2024, both the macOS and Windows binaries in the latest release appear to work, for the most part.
 
+Just a simple Minecraft-like game built using OpenGL 3.3, glad, glfw3 and glm.
 So far I have included:
 - Random terrain generation
 - Shadow generation with two different shadow maps to increase the resolution for nearby objects
